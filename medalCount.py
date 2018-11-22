@@ -1,4 +1,5 @@
 import csv
+import matplotlib.pyplot as plt
 
 golds = []
 silvers = []
@@ -6,7 +7,7 @@ bronzes = []
 
 categories =[]
 
-with open('data/MedalData.csv') as csvfile:
+with open('./data/MedalData.csv') as csvfile:
     reader = csv.reader(csvfile)
     line_count = 0
 
@@ -20,10 +21,10 @@ with open('data/MedalData.csv') as csvfile:
                 golds.append(row[7])
 
             elif row[7] == "Silver":
-                golds.append(row[7])
+                silvers.append(row[7])
 
             elif row[7] == "Bronze":
-                golds.append(row[7])
+                bronzes.append(row[7])
             line_count += 1
 
 print(len(golds), 'Gold medals were won since \'24')
@@ -36,18 +37,18 @@ totalMedals = len(golds) + len(silvers) + len(bronzes)
 
 gold_percentage = int(len(golds) / totalMedals * 100)
 bronze_percentage = int(len(bronzes) / totalMedals * 100)
-silver_percentage = int(len(silers) / totalMedals * 100)
+silver_percentage = int(len(silvers) / totalMedals * 100)
 
 # chart visualization
 labels = "Gold", "Silver", "Bronze"
 sizes = [gold_percentage, silver_percentage, bronze_percentage]
 colors = ['gold', 'silver', 'chocolate']
-explode = (0.1, 0.1, 0.1)
+explode = (0.2, 0.1, 0.15 )
 
-plt.pis(sizez, explode=explode, colors=colors, autopt= '%1.1f%%', shadow=true, startangle=140)
+plt.pie(sizes, explode=explode, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
 plt.axis('equal')
 
 plt.legend(labels, loc=1)
 plt.title("How many medals have been won overall?")
-plt.label("Medals won sine 1928")
+plt.xlabel("Medal Counts")
 plt.show()
